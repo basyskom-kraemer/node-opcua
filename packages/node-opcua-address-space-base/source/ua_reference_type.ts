@@ -10,7 +10,9 @@ export declare class UAReferenceType extends BaseNode {
     public readonly isAbstract: boolean;
     public readonly inverseName: LocalizedText;
 
+    /** @deprecated - use  isSubtypeOf instead */
     public isSupertypeOf(baseType: UAReferenceType | NodeIdLike): boolean;
+    public isSubtypeOf(baseType: UAReferenceType | NodeIdLike): boolean;
 
     public getAllSubtypes(): UAReferenceType[];
 

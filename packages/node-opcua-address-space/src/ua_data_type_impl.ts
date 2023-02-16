@@ -62,8 +62,8 @@ export class UADataTypeImpl extends BaseNodeImpl implements UADataType {
      *
      *    var dataTypeDouble = addressSpace.findDataType("Double");
      *    var dataTypeNumber = addressSpace.findDataType("Number");
-     *    assert(dataTypeDouble.isSupertypeOf(dataTypeNumber));
-     *    assert(!dataTypeNumber.isSupertypeOf(dataTypeDouble));
+     *    assert(dataTypeDouble.isSubtypeOf(dataTypeNumber));
+     *    assert(!dataTypeNumber.isSubtypeOf(dataTypeDouble));
      *
      */
     public get subtypeOf(): NodeId | null {
@@ -74,7 +74,7 @@ export class UADataTypeImpl extends BaseNodeImpl implements UADataType {
         return get_subtypeOfObj.call(this) as any as UADataType;
     }
 
-    public isSupertypeOf = tools.construct_isSupertypeOf<UADataType>(UADataTypeImpl);
+    public isSubtypeOf = tools.construct_isSubtypeOf<UADataType>(UADataTypeImpl);
 
     public readonly isAbstract: boolean;
 
@@ -277,9 +277,9 @@ export class UADataTypeImpl extends BaseNodeImpl implements UADataType {
 
         // we have a data type from a companion specification
         // let's see if this data type need to be registered
-        const isEnumeration = enumeration && this.isSupertypeOf(enumeration);
-        const isStructure = structure && this.isSupertypeOf(structure);
-        const isUnion = !!(structure && union && this.isSupertypeOf(union));
+        const isEnumeration = enumeration && this.isSubtypeOf(enumeration);
+        const isStructure = structure && this.isSubtypeOf(structure);
+        const isUnion = !!(structure && union && this.isSubtypeOf(union));
 
         const isRootDataType = (n: UADataType) => n.nodeId.namespace === 0 && n.nodeId.value === DataTypeIds.BaseDataType;
         // https://reference.opcfoundation.org/v104/Core/docs/Part3/8.49/#Table34

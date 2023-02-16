@@ -103,6 +103,10 @@ export interface UAVariableTypeOptions extends InternalBaseNodeOptions {
     value?: any;
     dataType: NodeIdLike;
 }
+
+function deprecate<T>(func: T):T {
+    return func;
+}
 export class UAVariableTypeImpl extends BaseNodeImpl implements UAVariableType {
     public readonly nodeClass = NodeClass.VariableType;
 
@@ -114,7 +118,10 @@ export class UAVariableTypeImpl extends BaseNodeImpl implements UAVariableType {
         return get_subtypeOfObj.call(this) as UAVariableType;
     }
 
-    public isSupertypeOf = tools.construct_isSupertypeOf<UAVariableType>(UAVariableTypeImpl);
+    public isSubtypeOf = tools.construct_isSubtypeOf<UAVariableType>(UAVariableTypeImpl);
+
+     /** @deprecated - use  isSubtypeOf instead */
+     public isSupertypeOf = deprecate(tools.construct_isSubtypeOf<UAVariableType>(UAVariableTypeImpl));
 
     public readonly isAbstract: boolean;
     public dataType: NodeId;

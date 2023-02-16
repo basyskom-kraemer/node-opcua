@@ -859,7 +859,7 @@ export function _handle_HierarchicalReference(node: BaseNode, reference: UARefer
 
         if (referenceType) {
             const HierarchicalReferencesType = addressSpace.findReferenceType("HierarchicalReferences");
-            if (referenceType.isSupertypeOf(HierarchicalReferencesType!)) {
+            if (referenceType.isSubtypeOf(HierarchicalReferencesType!)) {
                 assert(reference.isForward);
                 const targetNode = ReferenceImpl.resolveReferenceNode(addressSpace, reference);
                 _cache._childByNameMap[targetNode.browseName!.name!.toString()] = targetNode;
@@ -876,7 +876,7 @@ function _remove_HierarchicalReference(node: BaseNode, reference: UAReference) {
 
         if (referenceType) {
             const HierarchicalReferencesType = addressSpace.findReferenceType("HierarchicalReferences");
-            if (referenceType.isSupertypeOf(HierarchicalReferencesType!)) {
+            if (referenceType.isSubtypeOf(HierarchicalReferencesType!)) {
                 assert(reference.isForward);
                 const targetNode = ReferenceImpl.resolveReferenceNode(addressSpace, reference);
                 // Xx dotrace && tracelog(" adding object to map");

@@ -98,12 +98,15 @@ export class UAReferenceTypeImpl extends BaseNodeImpl implements UAReferenceType
     /**
      * returns true if self is  a super type of baseType
      */
-    public isSupertypeOf = tools.construct_isSupertypeOf<UAReferenceType>(UAReferenceTypeImpl);
+    public isSubtypeOf = tools.construct_isSubtypeOf<UAReferenceType>(UAReferenceTypeImpl);
+  
+    /** @deprecated - use `isSubtypeOf` instead*/
+    public isSupertypeOf = tools.construct_isSubtypeOf<UAReferenceType>(UAReferenceTypeImpl);
 
     /**
      * @private
      */
-    public _slow_isSupertypeOf = tools.construct_slow_isSupertypeOf<UAReferenceType>(UAReferenceTypeImpl);
+    public _slow_isSubtypeOf = tools.construct_slow_isSubtypeOf<UAReferenceType>(UAReferenceTypeImpl);
 
     constructor(options: UAReferenceTypeOptions) {
         super(options);
